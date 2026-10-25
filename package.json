@@ -1,0 +1,14 @@
+{
+  "name": "arzu-operations",
+  "version": "1.2.0",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node scripts/serve.mjs",
+    "test": "node --test tests/*.test.cjs",
+    "check": "node --check src/app.js && node --check src/data.js && node --check src/store.js && node --check src/auth.js && node --check src/theme.js && node --check src/charts.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
