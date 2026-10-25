@@ -102,11 +102,24 @@ svg {
   padding: 0 12px;
   margin-bottom: 36px;
 }
-.brand-logo {
+.brand-logo-window {
+  --logo-width: 168px;
   display: block;
-  width: 168px;
-  max-width: 100%;
+  position: relative;
+  width: var(--logo-width);
+  aspect-ratio: 1294 / 303;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: calc(var(--logo-width) * 0.04);
+}
+.brand-logo-window img {
+  position: absolute;
+  display: block;
+  width: calc(var(--logo-width) * 1600 / 1294);
+  max-width: none;
   height: auto;
+  left: calc(var(--logo-width) * -164 / 1294);
+  top: calc(var(--logo-width) * -305 / 1294);
 }
 .mobile-brand {
   display: none;
@@ -3316,9 +3329,8 @@ tbody tr.clickable:hover {
     gap: 8px;
   }
   .mobile-brand {
+    --logo-width: 76px;
     display: block;
-    width: 28px;
-    height: 28px;
   }
   .login-theme-toggle {
     top: 16px;

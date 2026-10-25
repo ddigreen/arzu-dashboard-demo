@@ -15,10 +15,13 @@ for (const f of scripts)
 const html = await readFile("src/index.html", "utf8");
 for (const asset of ["styles.css", ...scripts])
   if (!html.includes(asset)) throw new Error(`Missing ${asset}`);
-const logos = ["assets/arzu-logo.svg", "assets/arzu-mark.svg"];
+const logos = ["assets/arzu-official.jpg", "assets/arzu-official.gif"];
 for (const asset of logos) {
-  const svg = await readFile(`src/${asset}`, "utf8");
-  if (!svg.includes("<svg")) throw new Error(`Invalid logo asset: ${asset}`);
+  const image = await readFile(`src/${asset}`);
+  const valid = asset.endsWith(".jpg")
+    ? image.length > 4 && image[0] === 0xff && image[1] === 0xd8 && image[2] === 0xff
+    : /^(GIF87a|GIF89a)$/.test(image.subarray(0, 6).toString("ascii"));
+  if (!valid) throw new Error(`Invalid logo asset: ${asset}`);
 }
 await rm("dist", { recursive: true, force: true });
 await mkdir("dist");
@@ -35,7 +38,7 @@ const revision = hash.digest("hex").slice(0, 12);
 await writeFile(
   "dist/index.html",
   html.replace(
-    /(src|href)="((?:assets\/)?[\w.-]+\.(?:js|css|svg))"/g,
+    /(src|href)="((?:assets\/)?[\w.-]+\.(?:js|css|svg|jpg|gif))"/g,
     `$1="$2?v=${revision}"`,
   ),
 );
