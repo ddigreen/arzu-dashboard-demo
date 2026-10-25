@@ -96,29 +96,21 @@ svg {
 }
 .brand {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
   padding: 0 12px;
   margin-bottom: 36px;
 }
-.brand-mark {
-  width: 31px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  background: var(--blue);
-  border-radius: 8px;
-  color: white;
-  font-weight: 800;
-  font-size: 25px;
-  letter-spacing: -3px;
-  padding-right: 3px;
+.brand-logo {
+  display: block;
+  width: 168px;
+  max-width: 100%;
+  height: auto;
 }
-.brand-name {
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 2.5px;
-  line-height: 1;
+.mobile-brand {
+  display: none;
+  flex-shrink: 0;
 }
 .brand small {
   display: block;
@@ -2877,10 +2869,6 @@ tbody tr.clickable:hover {
   background: #303c50;
   color: var(--amber);
 }
-:root[data-theme="dark"] :is(.brand-mark, .nav-link.active) {
-  background: #315dcc;
-  color: #fff;
-}
 :root[data-theme="dark"] .nav-link {
   color: #aebbd0;
 }
@@ -3326,6 +3314,11 @@ tbody tr.clickable:hover {
   .topbar .top-actions {
     flex-shrink: 0;
     gap: 8px;
+  }
+  .mobile-brand {
+    display: block;
+    width: 28px;
+    height: 28px;
   }
   .login-theme-toggle {
     top: 16px;

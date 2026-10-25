@@ -20,7 +20,11 @@ for (const asset of [
   "app.js",
 ])
   if (!html.includes(asset)) throw new Error(`Missing ${asset}`);
+for (const asset of ["assets/arzu-logo.svg", "assets/arzu-mark.svg"]) {
+  const svg = await readFile(`src/${asset}`, "utf8");
+  if (!svg.includes("<svg")) throw new Error(`Invalid logo asset: ${asset}`);
+}
 await rm("dist", { recursive: true, force: true });
 await mkdir("dist");
 await cp("src", "dist", { recursive: true });
-console.log("ARZU: синтаксис проверен, 8 файлов собраны в dist/");
+console.log("ARZU: синтаксис и ресурсы проверены, сайт собран в dist/");
